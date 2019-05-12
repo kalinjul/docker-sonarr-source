@@ -15,4 +15,5 @@ services:
     restart: always
     volumes:
           - /mnt/Serien:/Serien
+          - /mnt/torrents:/torrents
 #          - /mnt/Filme:/Filme
