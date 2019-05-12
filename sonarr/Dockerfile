@@ -1,10 +1,20 @@
-FROM julakali/mono-build-base:latest
+FROM ubuntu
 
 RUN apt-get update \
-        && apt-get -y install libmediainfo-dev mediainfo \
-        && rm -rf /var/lib/apt/lists/*
+    && apt-get install -y gnupg ca-certificates libmediainfo-dev mediainfo \
+    && rm -rf /var/lib/apt/lists/*
 
-RUN cd /src/ \
+RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 3FA7E0328081BFF6A14DA29AA6A19B38D3D831EF
+RUN echo "deb https://download.mono-project.com/repo/ubuntu stable-bionic main" > /etc/apt/sources.list.d/mono-official-stable.list
+
+RUN mkdir /src
+WORKDIR /src/
+
+RUN apt-get update \
+        && DEBIAN_FRONTEND=noninteractive apt-get install -y nuget mono-devel mono-runtime mono-xbuild git nodejs npm wget \
+        && npm install -g yarn \
+        && nuget update -self \
+        && cd /src \
         && git clone https://github.com/julakali/Sonarr.git \
         && cd /src/Sonarr \
         && git submodule init && git submodule update \
@@ -12,7 +22,10 @@ RUN cd /src/ \
         && /bin/bash build.sh \
         && mv /src/Sonarr/_output_linux /opt/Sonarr \
         && cd / \
-        && rm -r src
+        && rm -r src \
+        && apt-get -y remove nuget mono-devel mono-xbuild git nodejs npm wget \
+        && apt-get -y autoremove \
+        && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /
 
