@@ -1,14 +1,14 @@
 version: "2.1"
 
 services:
-  jackett:
-    image: julakali/jackett-source:latest
-    container_name: jackett
-    ports:
-      - "9117:9117"
-    restart: always
+#  jackett:
+#    image: julakali/jackett-source:latest
+#    container_name: jackett
+#    ports:
+#      - "9117:9117"
+#    restart: always
   sonarr:
-    image: julakali/sonarr-source:latest
+    image: julakali/sonarr-bin:latest
     container_name: sonarr
     ports:
       - "8989:8989"
