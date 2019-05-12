@@ -1,4 +1,4 @@
-FROM mono-base
+FROM julakali/mono-build-base:latest
 
 RUN apt-get update \
         && apt-get -y install libmediainfo-dev mediainfo \

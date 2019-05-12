@@ -1,0 +1,18 @@
+version: "2.1"
+
+services:
+  jackett:
+    image: julakali/jackett-source:latest
+    container_name: jackett
+    ports:
+      - "9117:9117"
+    restart: always
+  sonarr:
+    image: julakali/sonarr-source:latest
+    container_name: sonarr
+    ports:
+      - "8989:8989"
+    restart: always
+    volumes:
+          - /mnt/Serien:/Serien
+#          - /mnt/Filme:/Filme

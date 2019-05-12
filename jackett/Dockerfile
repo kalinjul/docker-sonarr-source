@@ -1,4 +1,4 @@
-FROM mono-base
+FROM julakali/mono-build-base:latest
 
 RUN apt-get update \
     && apt-get install -y curl apt-transport-https \
@@ -14,6 +14,7 @@ RUN apt-get update \
 
 RUN cd /src && git clone https://github.com/julakali/Jackett.git \
         && cd /src/Jackett \
+        && git checkout f86e8dd5b60ee71012e8d1b75eea7a057d3b2997 \
         && git submodule init && git submodule update \
         && /bin/bash build.sh -target=Linux \
         && mv /src/Jackett/BuildOutput/netcoreapp2.2/linux-x64/Jackett /opt/Jackett \
