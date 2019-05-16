@@ -1,12 +1,10 @@
 FROM julakali/mono-build-base:latest
 
-RUN apt-get update \
-        && apt-get -y install libmediainfo-dev mediainfo \
-        && rm -rf /var/lib/apt/lists/*
-
 RUN cd /src/ \
         && git clone https://github.com/julakali/Sonarr.git \
         && cd /src/Sonarr \
+        && git checkout dev \
+        && git rev-parse HEAD \
         && git submodule init && git submodule update \
         && wget https://dist.nuget.org/win-x86-commandline/latest/nuget.exe -O tools/nuget/nuget.exe \
         && /bin/bash build.sh \

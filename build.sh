@@ -1,7 +1,7 @@
 set -x
 
 docker build -t julakali/mono-build-base base/
-docker build -t julakali/sonarr-source sonarr/
+docker build --no-cache -t julakali/sonarr-source sonarr/
 docker build -t julakali/jackett-source jackett/
 
 docker rm sonarr
@@ -10,7 +10,7 @@ docker create --name sonarr julakali/sonarr-source
 rm -r sonarr-bin/opt/Sonarr
 docker cp sonarr:/opt/Sonarr sonarr-bin/opt/
 
-docker build -t julakali/sonarr-bin sonarr-bin/
+docker build --no-cache -t julakali/sonarr-bin sonarr-bin/
 
 docker push julakali/sonarr-bin
 
