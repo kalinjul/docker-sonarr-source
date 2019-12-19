@@ -14,6 +14,10 @@ services:
       - "8989:8989"
     restart: always
     volumes:
+          - "sonarrconfig:/config"
           - /mnt/Serien:/Serien
           - /mnt/torrents:/torrents
 #          - /mnt/Filme:/Filme
+
+volumes:
+  sonarrconfig:
