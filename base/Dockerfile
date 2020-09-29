@@ -8,9 +8,12 @@ RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 3FA7E03280
 RUN echo "deb https://download.mono-project.com/repo/ubuntu stable-bionic main" > /etc/apt/sources.list.d/mono-official-stable.list
 
 RUN apt-get update \
-    && DEBIAN_FRONTEND=noninteractive apt-get install -y nuget mono-devel mono-complete mono-xbuild git nodejs npm wget
+    && DEBIAN_FRONTEND=noninteractive apt-get install -y nuget mono-devel mono-complete mono-xbuild git nodejs npm wget curl
 
-RUN npm install -g yarn
+#RUN npm install -g yarn
+RUN curl -o- -L https://yarnpkg.com/install.sh | bash
+RUN ln -s /root/.yarn/bin/yarn /usr/bin/yarn
+
 RUN nuget update -self
 
 RUN mkdir /src && cd /src

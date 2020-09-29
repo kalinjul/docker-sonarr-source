@@ -1,8 +1,7 @@
-set -x
+set -ex
 
 docker build -t julakali/mono-build-base base/
 docker build -t julakali/sonarr-source sonarr/
-#docker build -t julakali/jackett-source jackett/
 
 docker rm sonarr
 docker create --name sonarr julakali/sonarr-source 
