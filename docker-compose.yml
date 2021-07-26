@@ -1,12 +1,17 @@
 version: "2.1"
 
 services:
-#  jackett:
+  jackett:
+    image: linuxserver/jackett:version-v0.16.1600
 #    image: julakali/jackett-source:latest
-#    container_name: jackett
-#    ports:
-#      - "9117:9117"
-#    restart: always
+    container_name: jackett
+    ports:
+      - "9117:9117"
+    volumes:
+      - jackettconfig:/config
+    environment:
+      - TZ=Europe/Berlin
+    restart: always
   sonarr:
     image: julakali/sonarr-bin:latest
     container_name: sonarr
@@ -21,3 +26,4 @@ services:
 
 volumes:
   sonarrconfig:
+  jackettconfig:
