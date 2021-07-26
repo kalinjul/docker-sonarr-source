@@ -3,7 +3,7 @@ set -ex
 docker build -t julakali/mono-build-base base/
 docker build -t julakali/sonarr-source sonarr/
 
-docker rm sonarr
+docker rm sonarr || true
 docker create --name sonarr julakali/sonarr-source 
 
 rm -r sonarr-bin/opt/Sonarr
